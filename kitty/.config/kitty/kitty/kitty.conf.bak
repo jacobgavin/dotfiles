@@ -1,0 +1,12 @@
+# BEGIN_KITTY_THEME
+# Adapta Nokto Maia
+include current-theme.conf
+
+confirm_os_window_close 0
+font_family             FiraCode Nerd Font 
+font_size               14.0
+macos_thicken_font      0.75
+macos_titlebar_color    background
+window_padding_width    4
+
+# END_KITTY_THEME
