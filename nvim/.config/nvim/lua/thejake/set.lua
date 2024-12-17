@@ -1,6 +1,7 @@
 vim.opt.guicursor = ""
 
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.o.listchars = 'trail:-,nbsp:+,tab:▏ ,eol:↴'
+vim.o.list = true
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
