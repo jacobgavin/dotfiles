@@ -28,6 +28,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "ts_ls",
+                "eslint"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -35,7 +36,6 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -49,7 +49,17 @@ return {
                         }
                     }
                 end,
-            }
+                ["ts_ls"] = function()
+                    require('lspconfig').eslint.setup({
+                        on_attach = function(client, bufnr)
+                            vim.api.nvim_create_autocmd("BufWritePre", {
+                                buffer = bufnr,
+                                command = "EslintFixAll",
+                            })
+                        end,
+                    })
+                end
+            },
         })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }

@@ -21,12 +21,6 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({ "BufWritePre" }, {
-    group = TheJakeGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
-
 autocmd('LspAttach', {
     group = TheJakeGroup,
     callback = function(e)
@@ -42,12 +36,16 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "dn", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "dp", function() vim.diagnostic.goto_prev() end, opts)
 
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = e.buf,
-            callback = function(args)
-                require("conform").format({ bufnr = args.buf })
-            end,
-        })
+        local client = vim.lsp.get_client_by_id(e.data.client_id)
+        if not client then return end
+        if client.supports_method('textDocument/formatting') then
+            autocmd("BufWritePre", {
+                buffer = e.buf,
+                callback = function()
+                    require("conform").format({ bufnr = e.buf, id = client.id })
+                end,
+            })
+        end
     end
 })
 
