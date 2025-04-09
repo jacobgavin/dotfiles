@@ -28,7 +28,9 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "ts_ls",
-                "eslint"
+                "eslint",
+                -- "denols",
+                "biome"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -47,6 +49,67 @@ return {
                                 }
                             }
                         }
+                    }
+                end,
+                -- ["denols"] = function()
+                --     local lspconfig = require("lspconfig")
+                --     lspconfig.denols.setup {
+                --         capabilities = capabilities,
+                --         root_dir = require('lspconfig.util').root_pattern(
+                --             'deno.json',
+                --             'deno.jsonc'
+                --         ),
+                --         init_options = {
+                --             unstable = true,
+                --             lint = true,
+                --         }
+                --     }
+                -- end,
+                ["ts_ls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.ts_ls.setup {
+                        capabilities = capabilities,
+                        root_dir = lspconfig.util.root_pattern("package.json"),
+                        single_file_support = false,
+                    }
+                end,
+                ["biome"] = function()
+                    local util = require 'lspconfig'
+                    util.biome.setup {
+                        default_config = {
+                            cmd = { 'biome', 'lsp-proxy' },
+                            filetypes = {
+                                'astro',
+                                'css',
+                                'graphql',
+                                'javascript',
+                                'javascriptreact',
+                                'json',
+                                'jsonc',
+                                'svelte',
+                                'typescript',
+                                'typescript.tsx',
+                                'typescriptreact',
+                                'vue',
+                            },
+                            root_dir = function(fname)
+                                local root_files = { 'biome.json', 'biome.jsonc' }
+                                root_files = util.insert_package_json(root_files, 'biome', fname)
+                                return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+                            end,
+                            single_file_support = false,
+                        },
+                        docs = {
+                            description = [[
+                                https://biomejs.dev
+
+                                Toolchain of the web. [Successor of Rome](https://biomejs.dev/blog/annoucing-biome).
+
+                                ```sh
+                                    npm install [-g] @biomejs/biome
+                                ```
+                            ]],
+                        },
                     }
                 end,
             },

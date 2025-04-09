@@ -115,3 +115,4 @@ alias fetchorigin='git fetch origin main:main'
 
 source "${ZDOTDIR:-${HOME}}/.zshrc-`uname`"
 
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
