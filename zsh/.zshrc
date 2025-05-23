@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -115,3 +115,11 @@ alias fetchorigin='git fetch origin main:main'
 
 source "${ZDOTDIR:-${HOME}}/.zshrc-`uname`"
 
+
+# bun completions
+[ -s "/home/jacob/.bun/_bun" ] && source "/home/jacob/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+. "/home/jacob/.deno/env"
