@@ -123,3 +123,11 @@ source "${ZDOTDIR:-${HOME}}/.zshrc-`uname`"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 . "/home/jacob/.deno/env"
+
+# Cursor shortcut
+alias cursor='~/Applications/cursor.AppImage --no-sandbox'
+
+# Android SDK (emulator stuff)
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools

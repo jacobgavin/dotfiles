@@ -11,9 +11,9 @@ return {
     },
     formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { "dprint" },
-        javascriptreact = { "dprint" },
-        typescript = { "dprint" },
-        typescriptreact = { "dprint" },
+        javascript = { "dprint", "prettier" },
+        javascriptreact = { "dprint", "prettier" },
+        typescript = { "dprint", "prettier" },
+        typescriptreact = { "dprint", "prettier" },
     },
 }
