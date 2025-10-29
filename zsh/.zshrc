@@ -122,7 +122,11 @@ source "${ZDOTDIR:-${HOME}}/.zshrc-`uname`"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. "/home/jacob/.deno/env"
+FILE="/home/jacob/.deno/env" 
+if [ -f $FILE ]; then
+    . "/home/jacob/.deno/env"
+fi
+
 
 # Cursor shortcut
 alias cursor='~/Applications/cursor.AppImage --no-sandbox'
