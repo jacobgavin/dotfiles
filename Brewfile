@@ -1,0 +1,5 @@
+brew "neovim"
+brew "nvm"
+brew "stow"
+brew "zsh-syntax-highlighting"
+cask "kitty"
